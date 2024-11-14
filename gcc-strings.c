@@ -139,34 +139,34 @@ void reverse_i (char* s_string) /* Reverse a string (in place, modifying the ori
    }
 }
 
-void upper_i (char* _string) /* Convert string to uppercase (in place, modifying the original string) */
+void upper_i (char* s_string) /* Convert string to uppercase (in place, modifying the original string) */
 {
-   while (*_string)
+   while (*s_string)
    {
-      *_string = toupper(*_string);
-      _string++;
+      if (islower(*s_string)) *s_string = toupper(*s_string);
+      s_string++;
    }
 }
 
-void lower_i (char *_string)
+void lower_i (char *s_string)
 {
-   while (*_string)
+   while (*s_string)
    {
-      *_string = tolower(*_string);
-      _string++;
+      if (isupper(*s_string)) *s_string = tolower(*s_string);
+      s_string++;
    }
 }
 
-int compare(const void* _first, const void* _second)
+int compare(const void* c_first, const void* c_second)
 {
-    if (*(char*) _first != *(char*) _second) /* Compare characters */
-        return *(char *) _first - *(char *) _second; 
+    if (*(char*) c_first != *(char*) c_second) /* Compare characters */
+        return *(char *) c_first - *(char *) c_second; 
     return 0;
 }
 
-void sort_i (char* _string) /* Sort string) */
+void sort_i (char* s_string) /* Sort string) */
 {
-   qsort (_string, strlen(_string), sizeof *_string, compare); /* Sort alphabetic characters in place */
+   qsort (s_string, strlen(s_string), sizeof *s_string, compare); /* Sort alphabetic characters in place */
 }
 
 
