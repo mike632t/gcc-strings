@@ -89,10 +89,11 @@ char* copy (const char* s_string) /* Copy a string */
 {
    char* s_output = malloc(strlen(s_string) + 1);
    char* s_pointer = s_output;
-   while (*s_string)
-   {
-       *s_output++ = *s_string++;
-   }
+   if (s_string && *s_string) /* Check string isn't null or empty */
+      while (*s_string)
+      {
+          *s_output++ = *s_string++;
+      }
    *s_output = '\0';
    return s_pointer;
 }
@@ -118,11 +119,12 @@ void shuffle_i(char* s_string)
    int i_offset;
    int i_count;
    
-   for(i_count = i_length; i_count > 1 ; i_count--)
-   {
-      i_offset = (int)((double)i_count * (rand() / (RAND_MAX + 1.0)));
-      s_string[i_count] ^= s_string[i_offset]; s_string[i_offset] ^= s_string[i_count]; s_string[i_count] ^= s_string[i_offset]; /* swap */
-   }
+   if (s_string && *s_string) /* Check string isn't null or empty */
+      for(i_count = i_length; i_count > 1 ; i_count--)
+      {
+         i_offset = (int)((double)i_count * (rand() / (RAND_MAX + 1.0)));
+         s_string[i_count] ^= s_string[i_offset]; s_string[i_offset] ^= s_string[i_count]; s_string[i_count] ^= s_string[i_offset]; /* swap */
+      }
 }
 
 void reverse_i (char* s_string) /* Reverse a string (in place, modifying the original string) */
@@ -131,12 +133,13 @@ void reverse_i (char* s_string) /* Reverse a string (in place, modifying the ori
    char *p_end = p_start + strlen(s_string) - 1; /* -1 for \0 */
    char c_temp;
 
-   while (p_start < p_end) /* Pointer arithmetic */
-   {
-      c_temp = *p_start;
-      *p_start++ = *p_end;
-      *p_end-- = c_temp;
-   }
+   if (s_string && *s_string) /* Check string isn't null or empty */
+      while (p_start < p_end) /* Pointer arithmetic */
+      {
+         c_temp = *p_start;
+         *p_start++ = *p_end;
+         *p_end-- = c_temp;
+      }
 }
 
 void upper_i (char* s_string) /* Convert string to uppercase (in place, modifying the original string) */
